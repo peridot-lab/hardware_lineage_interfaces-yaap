@@ -89,6 +89,8 @@ class PowerHintSession : public BnPowerHintSession, public Immobile {
     void updateHeuristicBoost() REQUIRES(mPowerHintSessionLock);
     void resetSessionHeuristicStates() REQUIRES(mPowerHintSessionLock);
     const std::shared_ptr<AdpfConfig> getAdpfProfile() const;
+    // SessionRecords exist only while the given profile has heuristic boost enabled.
+    static std::unique_ptr<SessionRecords> makeSessionRecords(const AdpfConfig &config);
     ProcessTag getProcessTag(int32_t tgid);
     ndk::ScopedAStatus setModeLocked(SessionMode mode, bool enabled)
             REQUIRES(mPowerHintSessionLock);
